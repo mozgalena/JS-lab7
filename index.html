@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Labotory work 7</title>
+	<script type='text/javascript' src='node_modules/jquery/dist/jquery.min.js'></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<h1>Meetings "Internet marketing" in New York</h1>
+
+<script>
+
+	$.ajax({
+		url: 'https://api.meetup.com/find/upcoming_events?key=7a53731324143043b576a2734516c4a&zip=10001&end_date_range=2018-12-30T00:00:00&text=internet%marketing$radius=150',
+		method: 'GET',
+		dataType: 'JSONP',
+		success: function (array) {
+		data = array.data.events;
+		// console.log(data);
+		for (i = 0; i < data.length; i++) {
+			$('.container').append(
+				'<h2>' + data[i].name + '</h2>' +
+				'<p><strong>Time: </strong>' + data[i].local_date +' '+ data[i].local_time + '</p>' +
+				'<p><strong>Place: </strong>' + (data[i].venue == undefined ? 'no address' : data[i].venue.address_1) + '</p>' +
+				'<p><strong>Program: </strong>' + data[i].description + '</p><br>' 
+
+				);
+		}
+	} 
+}
+)
+	console.log(data.length);
+</script>
+
+<div class="container">
+	
+</div>
+</body>
+</html>
